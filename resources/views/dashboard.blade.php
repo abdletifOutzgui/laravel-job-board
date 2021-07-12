@@ -3,7 +3,7 @@
         <div class="container px-5 py-12 mx-auto">
             <div class="mb-12 flex items-center">
                 <h2 class="text-2xl font-medium text-gray-900 title-font px-4">
-                    Your listings ({{ $listings->count() }})
+                    Your listings ({{ auth()->user()->listings->count() }})
                 </h2>
                 <form action="{{ route('logout') }}" method="post">
                     @csrf
@@ -11,7 +11,7 @@
                 </form>
             </div>
             <div class="-my-6">
-                @foreach($listings as $listing)
+                @foreach(auth()->user()->listings as $listing)
                     <a
                         href="{{ route('listings.show', $listing->slug) }}"
                         class="py-6 px-4 flex flex-wrap md:flex-nowrap border-b border-gray-100 {{ $listing->is_highlighted ? 'bg-yellow-100 hover:bg-yellow-200' : 'bg-white hover:bg-gray-100' }}"
